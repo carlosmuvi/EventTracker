@@ -1,7 +1,6 @@
-package com.carlosmuvi.eventtracker
+package com.carlosmuvi.eventtracker.ui.addevent
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,21 +21,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.carlosmuvi.eventtracker.data.Event
-import com.carlosmuvi.eventtracker.data.EventRepository
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.carlosmuvi.eventtracker.ui.components.DropdownMenu
 import kotlinx.coroutines.launch
-import java.util.*
 
 @Composable
-fun AddEventScreen(eventRepository: EventRepository) {
+fun AddEventScreen(
+    viewModel: AddEventViewModel = viewModel()
+) {
     val coroutineScope = rememberCoroutineScope()
-    AddEventScreen { coroutineScope.launch { eventRepository.save(it) } }
+    AddEventScreen { coroutineScope.launch { viewModel.save(it) } }
 }
 
 @Composable
 fun AddEventScreen(
-    onEventSubmit: (Event) -> Unit
+    onEventSubmit: (String) -> Unit
 ) {
     var description by remember { mutableStateOf("") }
 
@@ -58,7 +57,7 @@ fun AddEventScreen(
                 DropdownMenu()
                 Spacer(Modifier.size(8.dp))
                 Button(
-                    onClick = { onEventSubmit(Event(description, Date())) },
+                    onClick = { onEventSubmit(description) },
                     content = { Text(text = "Submit") }
                 )
             }

@@ -2,13 +2,14 @@ package com.carlosmuvi.eventtracker.data
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
 interface EventRepository {
     suspend fun save(event: Event)
     fun observe(): Flow<List<Event>>
 }
 
-class EventRepositoryImpl : EventRepository {
+class EventRepositoryImpl @Inject constructor() : EventRepository {
 
     private val events = MutableStateFlow<List<Event>>(emptyList())
 

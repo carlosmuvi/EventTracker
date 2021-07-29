@@ -8,12 +8,14 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
 fun HomeScreen(
+    viewModel: HomeViewModel = viewModel(),
     navigateToAddEvent: () -> Unit,
     navigateToYourEvents: () -> Unit
 ) {

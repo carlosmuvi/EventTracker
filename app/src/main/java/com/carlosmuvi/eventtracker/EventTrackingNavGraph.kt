@@ -9,6 +9,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.carlosmuvi.eventtracker.ui.addevent.AddEventScreen
 import com.carlosmuvi.eventtracker.ui.home.HomeScreen
 
 /**
@@ -23,7 +24,6 @@ object MainDestinations {
 fun EventTrackingNavGraph(
     navController: NavHostController = rememberNavController(),
     scaffoldState: ScaffoldState = rememberScaffoldState(),
-    appContainer: AppContainer,
     startDestination: String = MainDestinations.HOME_ROUTE
 ) {
     val actions = remember(navController) { MainActions(navController) }
@@ -40,7 +40,7 @@ fun EventTrackingNavGraph(
             )
         }
         composable(MainDestinations.ADD_EVENT_ROUTE) {
-            AddEventScreen(appContainer.eventRepository)
+            AddEventScreen()
         }
     }
 }

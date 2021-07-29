@@ -13,7 +13,6 @@ import com.carlosmuvi.eventtracker.ui.theme.EventTrackerTheme
 
 @Composable
 fun EventTrackingApp(
-    appContainer: AppContainer
 ) {
     EventTrackerTheme {
         val navController = rememberNavController()
@@ -30,8 +29,7 @@ fun EventTrackingApp(
         ) {
             EventTrackingNavGraph(
                 navController = navController,
-                scaffoldState = scaffoldState,
-                appContainer = appContainer
+                scaffoldState = scaffoldState
             )
         }
     }
