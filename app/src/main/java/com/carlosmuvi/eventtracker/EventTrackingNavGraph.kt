@@ -4,19 +4,20 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.carlosmuvi.eventtracker.ui.addevent.AddEventScreen
 import com.carlosmuvi.eventtracker.ui.home.HomeScreen
+import com.carlosmuvi.eventtracker.ui.yourevents.YourEventsScreen
 
 /**
  * Destinations used in the [EventTrackingNavGraph].
  */
 object MainDestinations {
     const val ADD_EVENT_ROUTE = "add_event"
+    const val YOUR_EVENTS = "your_events"
     const val HOME_ROUTE = "home"
 }
 
@@ -27,7 +28,6 @@ fun EventTrackingNavGraph(
     startDestination: String = MainDestinations.HOME_ROUTE
 ) {
     val actions = remember(navController) { MainActions(navController) }
-    val coroutineScope = rememberCoroutineScope()
 
     NavHost(
         navController = navController,
@@ -36,11 +36,14 @@ fun EventTrackingNavGraph(
         composable(MainDestinations.HOME_ROUTE) {
             HomeScreen(
                 navigateToAddEvent = actions.navigateToAddEvent,
-                navigateToYourEvents = {}
+                navigateToYourEvents = actions.navigateToYourEvents
             )
         }
+        composable(MainDestinations.YOUR_EVENTS) {
+            YourEventsScreen()
+        }
         composable(MainDestinations.ADD_EVENT_ROUTE) {
-            AddEventScreen()
+            AddEventScreen(navigateUp = actions.navigateUp)
         }
     }
 }
@@ -49,7 +52,7 @@ fun EventTrackingNavGraph(
  * Models the navigation actions in the app.
  */
 class MainActions(navController: NavHostController) {
-    val navigateToAddEvent: () -> Unit = {
-        navController.navigate(MainDestinations.ADD_EVENT_ROUTE)
-    }
+    val navigateUp: () -> Unit = { navController.navigateUp() }
+    val navigateToAddEvent: () -> Unit = { navController.navigate(MainDestinations.ADD_EVENT_ROUTE) }
+    val navigateToYourEvents: () -> Unit = { navController.navigate(MainDestinations.YOUR_EVENTS) }
 }

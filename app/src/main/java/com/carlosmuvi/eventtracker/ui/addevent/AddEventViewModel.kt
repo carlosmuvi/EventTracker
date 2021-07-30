@@ -14,15 +14,10 @@ class AddEventViewModel @Inject constructor(
     private val eventRepository: EventRepository
 ) : ViewModel() {
 
-
-    suspend fun save(description: String) {
+    fun save(description: String, navigateUp: () -> Unit) {
         viewModelScope.launch {
-            eventRepository.save(
-                Event(
-                    description = description,
-                    date = Date()
-                )
-            )
+            eventRepository.save(Event(description = description, date = Date()))
+            navigateUp()
         }
     }
 }

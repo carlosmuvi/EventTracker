@@ -1,4 +1,4 @@
-package com.carlosmuvi.eventtracker.ui.addevent
+package com.carlosmuvi.eventtracker.ui.yourevents
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,24 +17,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.carlosmuvi.eventtracker.data.Event
+import com.carlosmuvi.eventtracker.ui.addevent.AddEventViewModel
 import com.carlosmuvi.eventtracker.ui.components.DropdownMenu
+import kotlinx.coroutines.launch
 
 @Composable
-fun AddEventScreen(
-    viewModel: AddEventViewModel = hiltViewModel(),
-    navigateUp: () -> Unit
+fun YourEventsScreen(
+    viewModel: YourEventsViewModel = hiltViewModel()
 ) {
-    AddEventScreen(
-        onEventSubmit = { event -> viewModel.save(event, navigateUp) }
-    )
+    val state = viewModel.state.collectAsState()
+    YourEventsScreen(state.value.events)
 }
 
 @Composable
-private fun AddEventScreen(
-    onEventSubmit: (String) -> Unit
+fun YourEventsScreen(
+    events: List<Event>
 ) {
-
-    var description by remember { mutableStateOf("") }
 
     Column(
         modifier = Modifier.fillMaxWidth()
@@ -45,18 +45,9 @@ private fun AddEventScreen(
                 modifier = Modifier.fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                OutlinedTextField(
-                    value = description,
-                    onValueChange = { description = it },
-                    label = { Text("Description") },
-                    modifier = Modifier.fillMaxWidth(),
-                )
-                DropdownMenu()
-                Spacer(Modifier.size(8.dp))
-                Button(
-                    onClick = { onEventSubmit(description) },
-                    content = { Text(text = "Submit") }
-                )
+                events.forEach {
+                    Text(text = it.toString())
+                }
             }
         }
     }
@@ -64,6 +55,6 @@ private fun AddEventScreen(
 
 @Preview
 @Composable
-fun AddEventScreenPreview() {
-    AddEventScreen(onEventSubmit = {})
+fun YourEventsScreenPreview() {
+    YourEventsScreen(emptyList())
 }
