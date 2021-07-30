@@ -1,5 +1,7 @@
-package com.carlosmuvi.eventtracker.data
+package com.carlosmuvi.eventtracker.di
 
+import com.carlosmuvi.eventtracker.data.EventRepository
+import com.carlosmuvi.eventtracker.data.EventRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

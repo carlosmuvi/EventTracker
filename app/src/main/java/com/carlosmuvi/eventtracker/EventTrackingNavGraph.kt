@@ -24,7 +24,6 @@ object MainDestinations {
 @Composable
 fun EventTrackingNavGraph(
     navController: NavHostController = rememberNavController(),
-    scaffoldState: ScaffoldState = rememberScaffoldState(),
     startDestination: String = MainDestinations.HOME_ROUTE
 ) {
     val actions = remember(navController) { MainActions(navController) }

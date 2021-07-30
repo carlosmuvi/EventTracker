@@ -12,14 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = viewModel(),
     navigateToAddEvent: () -> Unit,
     navigateToYourEvents: () -> Unit
 ) {
     HomeScreen(
+        viewModel = hiltViewModel(),
         onAddEventClick = { navigateToAddEvent() },
         onYourEventsClick = { navigateToYourEvents() }
     )
@@ -27,6 +28,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeScreen(
+    viewModel: HomeViewModel,
     onAddEventClick: () -> Unit,
     onYourEventsClick: () -> Unit,
 ) {
