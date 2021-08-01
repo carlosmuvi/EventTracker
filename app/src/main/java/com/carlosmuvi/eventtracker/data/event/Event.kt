@@ -1,6 +1,6 @@
-package com.carlosmuvi.eventtracker.data
+package com.carlosmuvi.eventtracker.data.event
 
-import java.util.*
+import java.util.Date
 
 data class Event(
     val description: String,
