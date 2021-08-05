@@ -26,6 +26,7 @@ fun EventTrackingApp() {
         ) {
             firstDestination.value?.let {
                 EventTrackingNavGraph(
+                    scaffoldState = scaffoldState,
                     navController = navController,
                     startDestination = it
                 )

@@ -19,9 +19,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 
 @Composable
-fun DropdownMenu() {
+fun DropdownMenu(
+    options: List<String>
+) {
     var expanded by remember { mutableStateOf(false) }
-    val suggestions = listOf("Item1", "Item2", "Item3")
     var selectedText by remember { mutableStateOf("") }
 
     val icon = if (expanded)
@@ -45,7 +46,7 @@ fun DropdownMenu() {
             onDismissRequest = { expanded = false },
             modifier = Modifier.fillMaxWidth()
         ) {
-            suggestions.forEach { label ->
+            options.forEach { label ->
                 DropdownMenuItem(onClick = {
                     selectedText = label
                 }) {

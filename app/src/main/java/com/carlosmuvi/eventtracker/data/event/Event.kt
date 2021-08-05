@@ -1,8 +1,10 @@
 package com.carlosmuvi.eventtracker.data.event
 
-import java.util.Date
+import java.time.LocalDateTime
 
 data class Event(
+    val id: String,
     val description: String,
-    val date: Date
+    val startTime: LocalDateTime,
+    val endTime: LocalDateTime
 )

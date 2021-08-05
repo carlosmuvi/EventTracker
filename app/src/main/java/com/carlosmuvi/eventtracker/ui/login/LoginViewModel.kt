@@ -3,7 +3,7 @@ package com.carlosmuvi.eventtracker.ui.login
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.carlosmuvi.eventtracker.data.AccountRepository
+import com.carlosmuvi.eventtracker.data.account.AccountRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

@@ -15,7 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.carlosmuvi.eventtracker.data.event.Event
-import java.util.*
+import java.time.LocalDateTime
 
 @Composable
 fun YourEventsScreen(
@@ -51,9 +51,9 @@ fun YourEvent(event: Event) {
         Icon(Icons.Filled.DateRange, "contentDescription", Modifier.padding(16.dp))
         Column {
             Text(text = event.description, style = MaterialTheme.typography.h6)
-            Text(text = event.date.toString(), style = MaterialTheme.typography.body1)
+            Text(text = event.startTime.toString(), style = MaterialTheme.typography.body1)
+            Text(text = event.endTime.toString(), style = MaterialTheme.typography.body1)
         }
-
     }
 }
 
@@ -62,7 +62,12 @@ fun YourEvent(event: Event) {
 fun YourEventsScreenPreview() {
     YourEventsScreen(
         listOf(
-            Event("Hola que tal", Date())
+            Event(
+                id = "",
+                description = "Hola que tal",
+                startTime = LocalDateTime.now(),
+                endTime = LocalDateTime.now()
+            )
         )
     )
 }

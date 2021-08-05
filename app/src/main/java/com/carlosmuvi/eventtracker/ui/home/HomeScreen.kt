@@ -7,7 +7,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,20 +16,23 @@ import androidx.hilt.navigation.compose.hiltViewModel
 @Composable
 fun HomeScreen(
     navigateToAddEvent: () -> Unit,
-    navigateToYourEvents: () -> Unit
+    navigateToYourEvents: () -> Unit,
+    navigateToAddPerson: () -> Unit
 ) {
     HomeScreen(
         viewModel = hiltViewModel(),
         onAddEventClick = { navigateToAddEvent() },
+        onAddPersonClick = { navigateToAddPerson() },
         onYourEventsClick = { navigateToYourEvents() }
     )
 }
 
 @Composable
-fun HomeScreen(
+private fun HomeScreen(
     viewModel: HomeViewModel,
     onAddEventClick: () -> Unit,
-    onYourEventsClick: () -> Unit,
+    onAddPersonClick: () -> Unit,
+    onYourEventsClick: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -43,6 +45,12 @@ fun HomeScreen(
                 onClick = { onYourEventsClick() },
                 content = { Text(text = "Your events") }
             )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = { onAddPersonClick() },
+                content = { Text(text = "Add person") }
+            )
         }
         FloatingActionButton(
             onClick = { onAddEventClick() },
@@ -51,5 +59,4 @@ fun HomeScreen(
             Icon(Icons.Filled.Add, contentDescription = "Add event")
         }
     }
-
 }

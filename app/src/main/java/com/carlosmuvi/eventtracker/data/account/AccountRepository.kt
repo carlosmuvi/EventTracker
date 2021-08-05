@@ -1,4 +1,4 @@
-package com.carlosmuvi.eventtracker.data
+package com.carlosmuvi.eventtracker.data.account
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -11,7 +11,6 @@ import kotlin.coroutines.suspendCoroutine
 interface AccountRepository {
     suspend fun createAccount(email: String, password: String): FirebaseUser
     suspend fun logout()
-    suspend fun getUser() : FirebaseUser?
 }
 
 class AccountRepositoryImpl @Inject constructor() : AccountRepository {
@@ -29,15 +28,9 @@ class AccountRepositoryImpl @Inject constructor() : AccountRepository {
                     }
                 }
         }
-
     }
 
     override suspend fun logout() {
         mAuth.signOut()
     }
-
-    override suspend fun getUser(): FirebaseUser? {
-        return mAuth.currentUser
-    }
-
 }
